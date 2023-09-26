@@ -189,6 +189,7 @@
     <ClCompile Include="..\PS3EYEDriver\accessors.cpp" />
     <ClCompile Include="..\PS3EYEDriver\mgr.cpp" />
     <ClCompile Include="..\PS3EYEDriver\ps3eye.cpp" />
+    <ClCompile Include="..\PS3EYEDriver\ps3mic.cpp" />
     <ClCompile Include="..\PS3EYEDriver\queue.cpp" />
     <ClCompile Include="..\PS3EYEDriver\urb.cpp" />
   </ItemGroup>
@@ -196,6 +197,7 @@
     <ClInclude Include="..\PS3EYEDriver\internal.hpp" />
     <ClInclude Include="..\PS3EYEDriver\mgr.hpp" />
     <ClInclude Include="..\PS3EYEDriver\ps3eye.hpp" />
+    <ClInclude Include="..\PS3EYEDriver\ps3mic.h" />
     <ClInclude Include="..\PS3EYEDriver\queue.hpp" />
     <ClInclude Include="..\PS3EYEDriver\setter.hpp" />
     <ClInclude Include="..\PS3EYEDriver\urb.hpp" />

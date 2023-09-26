@@ -35,6 +35,12 @@
     <ClCompile Include="setup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PS3EyeMicSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PS3EyeMicPushPin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source.def">

@@ -1,6 +1,6 @@
 #include <streams.h>
 #include <strsafe.h>
-#include "ps3eye.hpp"
+
 #include "PS3EyeSourceFilter.h"
 
 PS3EyePushPin::PS3EyePushPin(HRESULT *phr, CSource *pFilter, std::shared_ptr<ps3eye::camera> device) :

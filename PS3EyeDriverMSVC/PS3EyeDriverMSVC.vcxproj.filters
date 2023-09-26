@@ -30,6 +30,9 @@
     <ClCompile Include="..\PS3EYEDriver\urb.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\PS3EYEDriver\ps3mic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\PS3EYEDriver\internal.hpp">
@@ -48,6 +51,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\PS3EYEDriver\urb.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PS3EYEDriver\ps3mic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

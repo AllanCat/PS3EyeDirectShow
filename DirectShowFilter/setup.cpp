@@ -31,6 +31,12 @@ const AMOVIESETUP_MEDIATYPE sudOpPinTypes =
 	&MEDIASUBTYPE_RGB24      // Minor type
 };
 
+const AMOVIESETUP_MEDIATYPE sudOpPinTypesA =
+{
+	&MEDIATYPE_Audio,       // Major type
+	&MEDIASUBTYPE_PCM      // Minor type
+};
+
 const AMOVIESETUP_PIN sudOutputPinPS3Eye =
 {
 	L"Output",      // Obsolete, not used.
@@ -55,8 +61,15 @@ const AMOVIESETUP_FILTER sudPushSourcePS3Eye =
 };
 */
 
-CFactoryTemplate g_Templates[MAX_DEVICE_COUNT] =
+CFactoryTemplate g_Templates[MAX_DEVICE_COUNT + 1] =
 {
+	{
+	  g_ps3PS3EyeSourceA,               // Name
+	  &CLSID_PS3EyeSourceA,             // CLSID
+	  PS3EyeMicSource::CreateInstance,  // Method to create an instance of MyComponent
+	  NULL,                             // Initialization function
+	  NULL                              // Set-up information (for filters)
+	},
 	{
 	  g_ps3PS3EyeSource,                // Name
 	  &CLSID_PS3EyeSource,              // CLSID
@@ -113,7 +126,7 @@ CFactoryTemplate g_Templates[MAX_DEVICE_COUNT] =
 	  PS3EyeSource::CreateInstance8,    // Method to create an instance of MyComponent
 	  NULL,                             // Initialization function
 	  NULL                              // Set-up information (for filters)
-	}
+	}	
 };
 
 int g_cTemplates = sizeof(g_Templates) / sizeof(g_Templates[0]);
@@ -124,6 +137,17 @@ const REGFILTERPINS2 sudOutputPinPS3Eye2 =
 	1,
 	1,
 	&sudOpPinTypes,
+	0,
+	NULL,
+	&PIN_CATEGORY_CAPTURE
+};
+
+const REGFILTERPINS2 sudOutputPinPS3EyeA2 =
+{
+	REG_PINFLAG_B_OUTPUT,
+	1,
+	1,
+	&sudOpPinTypesA,
 	0,
 	NULL,
 	&PIN_CATEGORY_CAPTURE
@@ -165,9 +189,24 @@ STDAPI RegisterFilters(BOOL bRegister, int filterCount)
 		sudPushSourcePS3Eye.dwVersion = 2;
 		sudPushSourcePS3Eye.dwMerit = MERIT_NORMAL;
 		sudPushSourcePS3Eye.cPins2 = 1;
+		sudPushSourcePS3Eye.rgPins2 = &sudOutputPinPS3EyeA2;
+
+		hr = pFM2->RegisterFilter(
+			*(g_Templates[0].m_ClsID),           // Filter CLSID. 
+			g_Templates[0].m_Name,               // Filter name.
+			NULL,								 // Device moniker. 
+			&CLSID_AudioInputDeviceCategory,     // Input device category.
+			g_Templates[0].m_Name,               // Instance data.
+			&sudPushSourcePS3Eye                 // Pointer to filter information.
+		);
+
+		sudPushSourcePS3Eye;
+		sudPushSourcePS3Eye.dwVersion = 2;
+		sudPushSourcePS3Eye.dwMerit = MERIT_NORMAL;
+		sudPushSourcePS3Eye.cPins2 = 1;
 		sudPushSourcePS3Eye.rgPins2 = &sudOutputPinPS3Eye2;
 
-		for (int i = 0; i < filterCount; i++)
+		for (int i = 1; i < filterCount + 1; i++)
 		{
 			hr = pFM2->RegisterFilter(
 				*(g_Templates[i].m_ClsID),           // Filter CLSID. 
@@ -191,7 +230,9 @@ STDAPI RegisterFilters(BOOL bRegister, int filterCount)
 		if (FAILED(hr))
 			return hr;
 
-		for (int i = 0; i < filterCount; i++)
+		hr = pFM2->UnregisterFilter(&CLSID_AudioInputDeviceCategory, g_Templates[0].m_Name, *(g_Templates[0].m_ClsID));
+
+		for (int i = 1; i < filterCount + 1; i++)
 		{
 			hr = pFM2->UnregisterFilter(&CLSID_VideoInputDeviceCategory, g_Templates[i].m_Name, *(g_Templates[i].m_ClsID));
 		}

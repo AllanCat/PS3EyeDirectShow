@@ -189,6 +189,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="PS3EyeMicPushPin.cpp" />
+    <ClCompile Include="PS3EyeMicSource.cpp" />
     <ClCompile Include="PS3EyePushPin.cpp" />
     <ClCompile Include="PS3EyeSource.cpp" />
     <ClCompile Include="setup.cpp" />

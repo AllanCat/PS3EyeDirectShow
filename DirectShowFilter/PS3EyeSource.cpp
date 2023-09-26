@@ -1,9 +1,7 @@
 #include <streams.h>
 #include <strsafe.h>
 
-#include "ps3eye.hpp"
 #include "PS3EyeSourceFilter.h"
-#include "PS3EyeGuids.h"
 
 PS3EyeSource::PS3EyeSource(IUnknown *pUnk, HRESULT *phr, const GUID id, int index)
 	: CSource(NAME("PS3EyeSource"), pUnk, id),
